@@ -1,0 +1,153 @@
+<%= form_with(model: customer) do |form| %>
+  <% if customer.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+        <% customer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col">
+      <%= form.text_field :first_name, class: "form-control", placeholder: "First Name" %>
+    </div>
+    <div class="col">
+      <%= form.text_field :last_name, class: "form-control", placeholder: "Last Name" %>
+    </div>
+    <div class="col input-group">
+      <%= form.label :last_call, "Date of Birth", class: "input-group-text" %>
+      <%= form.date_field :date_of_birth, class: "form-control", placeholder: "Date of Birth" %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <%= form.text_field :email, class: "form-control", placeholder: "Email" %>
+    </div>
+    <div class="col">
+      <%= form.text_field :contact, class: "form-control", placeholder: "Contact" %>
+    </div>
+    <div class="col">
+      <%= form.number_field :balance, class: "form-control", placeholder: "Balance" %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <div class="input-group">
+        <%= form.label :job, "Job", class: "input-group-text" %>
+        <%= form.select :job, options_for_select(["Unknown", "Managerial", "Technician", "Entrepreneur", "Blue Collar", "Retired", "Administrative", "Services", "Self-Employed", "Unemployed", "Housemaid", "Student"], @customer.job), {prompt: "Choose..."}, class: "form-select" %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <%= form.label :marital, "Marital", class: "input-group-text" %>
+        <%= form.select :marital, options_for_select(["Unknown", "Married", "Single", "Divorced"], @customer.marital), {prompt: "Choose..."}, class: "form-select" %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="input-group">
+        <%= form.label :education, "Education", class: "input-group-text" %>
+        <%= form.select :education, options_for_select(["Unknown", "Tertiary", "Secondary", "Primary"], @customer.education), {prompt: "Choose..."}, class: "form-select" %>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <div>
+        <%= form.label :default, "Has credit in default:", style: "display: block" %>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :default, "Yes", class: "form-check-input" %>
+          <%= form.label :default, "Yes", class: "form-class-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :default, "No", class: "form-check-input" %>
+          <%= form.label :default, "No", class: "form-class-label" %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <%= form.label :housing, "Has housing loan:", style: "display: block" %>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :housing, "Yes", class: "form-check-input" %>
+          <%= form.label :housing, "Yes", class: "form-class-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :housing, "No", class: "form-check-input" %>
+          <%= form.label :housing, "No", class: "form-class-label" %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div>
+        <%= form.label :loan, "Has personal loan:", style: "display: block" %>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :loan, "Yes", class: "form-check-input" %>
+          <%= form.label :loan, "Yes", class: "form-class-label" %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :loan, "No", class: "form-check-input" %>
+          <%= form.label :loan, "No", class: "form-class-label" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col input-group">
+      <%= form.label :last_call, "Last Call", class: "input-group-text" %>
+      <%= form.date_field :last_call, class: "form-control", placeholder: "Last Call" %>
+    </div>
+    <div class="col">
+     <%= form.number_field :calls, class: "form-control", placeholder: "Calls" %> 
+    </div>
+    <div class="col">
+      <%= form.number_field :previous_calls, class: "form-control", placeholder: "Previous Calls" %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <div class="input-group">
+        <%= form.label :previous_outcome, "Previous Outcome", class: "input-group-text" %>
+        <%= form.select :previous_outcome, options_for_select(["Unknown","Success","Failure"], @customer.previous_outcome), {prompt: "Choose..."}, class: "form-select" %>
+      </div>
+    </div>
+    <div class="col input-group">
+      <%= form.label :prediction, "Prediction", class: "input-group-text" %>
+      <%= form.select :prediction, options_for_select(["Unknown","Positive","Negative"], @customer.prediction), {prompt: "Choose..."}, class: "form-select" %>
+    </div>
+    <div class="col input-group">
+      <%= form.label :outcome, "Outcome", class: "input-group-text" %>
+      <%= form.select :outcome, options_for_select(["Unknown","Positive","Negative"], @customer.outcome), {prompt: "Choose..."}, class: "form-select" %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <%= form.text_area :notes, cols: 30, rows: 5, placeholder: "Notes...", class: "form-control", style: "resize: none;" %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <%= form.number_field :user_id, value: current_user.id, id: :customer_user_id, type: :hidden %>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col">
+      <%= submit_tag "Submit", class: "btn btn-outline-warning" %>
+    </div>
+  </div>
+  <br>
+<% end %>
+
+
+

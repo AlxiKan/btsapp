@@ -1,0 +1,42 @@
+<div class="row" style="max-height: 65%; min-height: 65%;">
+  <div class="col px-5">
+
+    <div class="row" style="max-height: 20%; min-height: 20%;">
+      <div class="col d-flex justify-content-start align-items-center">
+        <h2 class="text-light-emphasis">
+          Customers
+        </h2>
+      </div>
+    </div>
+
+    <div class="row border-bottom border-warning-subtle" style="max-height: 40vh; min-height: 40vh; overflow-y: scroll;">
+      <div class="col">
+        <%= render partial: "list" %>
+      </div>
+    </div>
+
+    <div class="row" style="max-height: 15%; min-height: 15%;">
+      <div class="col input-group d-flex justify-content-start align-items-center" style="min-width: 15%; max-width: 15%;">
+        <%= link_to "New customer", new_customer_path, class: "btn btn-outline-warning" %>
+      </div>
+      <div class="col input-group d-flex justify-content-end align-items-center" style="min-width: 45%; max-width: 45%;">
+        <%= link_to "All entries", customers_path, class: "btn btn-outline-warning" %>
+        <%= link_to "Positive", customers_path(column_name: "prediction", column_value: "Positive"), class: "btn btn-outline-warning" %>
+        <%= link_to "No calls", customers_path(column_name: "calls", column_value: 0), class: "btn btn-outline-warning" %>
+        <%= link_to "No outcome", customers_path(column_name: "outcome", column_value: "Unknown"), class: "btn btn-outline-warning" %>
+      </div>
+      <div class="col column-gap-3 d-flex justify-content-end align-items-center" style="min-width: 40%; max-width: 40%;">
+        <%= button_to "Reset", customers_reset_customers_path(user_id: current_user.id), method: :post, class: "btn btn-outline-danger" %>
+        <%= button_to "Delete all", customers_delete_customers_path(user_id: current_user.id), method: :post, class: "btn btn-outline-danger" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render partial: "tools" %>
+
+
+
+
+
+

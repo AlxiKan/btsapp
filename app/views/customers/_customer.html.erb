@@ -1,0 +1,83 @@
+<div class="row" id="<%= dom_id customer %>">
+
+  <div class="col" style="max-width: 90%; min-width: 90%;">
+    <table class="table table-hover">
+      <tbody>
+        <tr>
+          <th class="text-warning-emphasis">First Name:</th>
+          <td><%= customer.first_name %></td>
+          <th class="text-warning-emphasis">Last Name:</th>
+          <td><%= customer.last_name %></td>
+          <th class="text-warning-emphasis">Date of Birth:</th>
+          <td><%= customer.date_of_birth %></td>
+        </tr>
+        <tr>
+          <th class="text-warning-emphasis">Contact:</th>
+          <td><%= customer.contact %></td>
+          <th class="text-warning-emphasis">Email:</th>
+          <td><%= customer.email %></td>
+          <th class="text-warning-emphasis">Balance:</th>
+          <td><%= customer.balance %></td>
+        </tr>
+        <tr>
+          <th class="text-warning-emphasis">Job:</th>
+          <td><%= customer.job %></td>
+          <th class="text-warning-emphasis">Marital Status:</th>
+          <td><%= customer.marital %></td>
+          <th class="text-warning-emphasis">Education:</th>
+          <td><%= customer.education %></td>
+        </tr>
+        <tr>
+          <th class="text-warning-emphasis">Credit in Default:</th>
+          <td><%= customer.default %></td>
+          <th class="text-warning-emphasis">Housing Loan:</th>
+          <td><%= customer.housing %></td>
+          <th class="text-warning-emphasis">Personal Loan:</th>
+          <td><%= customer.loan %></td>
+        </tr>
+        <tr>
+          <th class="text-warning-emphasis">Calls:</th>
+          <td><%= customer.calls %>
+          <th class="text-warning-emphasis">Last Call:</th>
+          <td><%= customer.last_call %></td>
+          <th class="text-warning-emphasis">Previous Calls:</th>
+          <td><%= customer.previous_calls %></td>
+        </tr>
+        <tr>
+          <th class="text-warning-emphasis">Previous Outcome:</th>
+          <td><%= customer.previous_outcome %></th>
+          <th class="text-warning-emphasis">Prediction:</th>
+          <td><%= customer.prediction %></td>
+          <th class="text-warning-emphasis">Outcome:</th>
+          <td><%= customer.outcome %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th class="text-warning-emphasis">Notes:</th>
+          <td>
+            <textarea class="form-control" cols="30" rows="5" style="resize: none;" readonly>
+              <%= customer.notes %>
+            </textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div class="w-25">
+      <% if customer.outcome == "Unknown" %>
+        <%= form_tag(customer_call_customer_path, method: :post, class: "input-group") do %>
+          <%= select_tag(:outcome, options_for_select(['Not selected', 'Unknown', 'Failure', 'Success'], { selected: 'Not selected' }), class: "form-control") %>
+          <%= hidden_field_tag :id, @customer.id %>
+          <%= submit_tag 'Call', class: 'btn btn-outline-warning' %>
+        <% end %>
+      <% end %>
+    </div>
+    <br>
+  </div>
+</div>
+
+
+

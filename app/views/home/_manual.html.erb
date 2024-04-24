@@ -1,0 +1,156 @@
+<div class="row" style="max-height: 65%; min-height: 65%;">
+  <div class="col px-5">
+
+    <div class="row" style="max-height: 20%; min-height: 20%;">
+      <div class="col d-flex justify-content-start align-items-center">
+        <h2 class="text-light-emphasis">
+          Manual 
+        </h2>
+      </div>
+    </div>
+
+    <div class="row" style="max-height: 65%; min-height: 65%;">
+      <div class"col" style="min-width: 25%; max-width: 25%;">
+        <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+          <nav class="nav nav-pills flex-column">
+            <a class="nav-link text-warning" href="#help-customer-buttons">Customer tools</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1 text-warning" href="#help-new-customer">Query tool</a>
+            <a class="nav-link text-warning" href="#help-customer-tools">Customer tools</a>
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link ms-3 my-1 text-warning" href="#help-query">Query tool</a>
+              <a class="nav-link ms-3 my-1 text-warning" href="#help-id">ID tool</a>
+              <a class="nav-link ms-3 my-1 text-warning" href="#help-choose-file">Choose file tool</a>
+              <a class="nav-link ms-3 my-1 text-warning" href="#help-api">Choose file tool</a>
+            </nav>
+          </nav>
+        </nav>
+      </div>
+
+      <div class="col" style="min-width: 75%; max-width: 75%;">
+        <div style="max-height: 45vh; min-height: 45vh; overflow-y: scroll;">
+          <div id="help-customer-buttons">
+            <h4 class="text-warning">Customer Buttons</h4>
+          </div>
+          <br>
+          <div id="help-new-customer">
+            <h5 class="text-warning">New Customer</h5>
+            <p>
+              By clicking on the new customer button the app will
+              give you a form to fill out. After you submit the
+              form, the customer will be created.
+            </p>
+          </div>
+          <div id="help-customer-tools">
+            <h4 class="text-warning">Customer tools</h4>
+          </div>
+          <br>
+          <div id="help-query" class="w-75">
+            <h5 class="text-warning">Query Tool:</h5>
+            <p>
+              This tool is used to make queries to the customers
+              database.
+            <p>
+              By putting a valid column name in the first field
+              and valid a column value on the second field the
+              database will fetch and render the customers that
+              correspond with these values.
+            </p>
+            <p>
+              In case you put an invalid column name the app will
+              give you an error. In case you put an invalid column
+              value the database will fetch and render no entries.
+              Here are the valid column names:
+            </p>
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <th class="text-warning">first_name</th>
+                  <td>string</td>
+                  <th class="text-warning">last_name</th>
+                  <td>string</td>
+                  <th class="text-warning">email</th>
+                  <td>string</td>
+                </tr>
+                <tr>
+                  <th class="text-warning">contact</th>
+                  <td>string</td>
+                  <th class="text-warning">date_of_birth</th>
+                  <td>date</td>
+                  <th class="text-warning">job</th>
+                  <td>string</td>
+                </tr>
+                <tr>
+                  <th class="text-warning">marital</th>
+                  <td>string</td>
+                  <th class="text-warning">education</th>
+                  <td>string</td>
+                  <th class="text-warning">default</th>
+                  <td>string</td>
+                </tr>
+                <tr>
+                  <th class="text-warning">loan</th>
+                  <td>string</td>
+                  <th class="text-warning">housing</th>
+                  <td>string</td>
+                  <th class="text-warning">balance</th>
+                  <td>number</td>
+                </tr>
+                <tr>
+                  <th class="text-warning">calls</th>
+                  <td>number</td>
+                  <th class="text-warning">last_call</th>
+                  <td>date</td>
+                  <th class="text-warning">previous_calls</th>
+                  <td>number</td>
+                </tr>
+                <tr>
+                  <th class="text-warning">previous_outcome</th>
+                  <td>string</td>
+                  <th class="text-warning">prediction</th>
+                  <td>string</td>
+                  <th class="text-warning">outcome</th>
+                  <td>string</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br>
+          <div id="help-id">
+            <h5 class="text-warning">ID Tool:</h5>
+            <p>
+              This tool is used to search for specific customers based on their id.
+              After you provide the id of a customer, the app will render the customer's
+              page.
+            </p>
+            <p>
+              If you provide an id of a customer that does not exist, the app will give
+              you an error.
+            </p>
+          </div>
+          <div id="help-choose-file">
+            <h5 class="text-warning">Choose File Tool:</h5>
+            <p>
+              This tool is used to import customer entries via a CSV file. By clicking the choose 
+              file field the app will open your file explorer. When a file is choosen the field
+              will display the file name. By clicking the import CSV button the app will import the
+              customer entries from the CSV file and display them on the content view.
+            </p>
+            <p>
+              In case your file is invalid the app will give you an error.
+            </p>
+            <h7 class="text-warning">Note:</h7>
+            <p>
+            If your CSV file contains rows with invalid values, the app will not import those
+            rows.
+            </p>
+          </div>
+          <div id="help-api">
+            <h5 class="text-warning">API Tool</h5>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+

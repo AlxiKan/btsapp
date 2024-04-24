@@ -1,0 +1,50 @@
+
+<div id="customers">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="text-warning-emphasis">ID</th>
+        <th class="text-warning-emphasis">First Name</th>
+        <th class="text-warning-emphasis">Last Name</th>
+        <th class="text-warning-emphasis">Contact</th>
+        <th class="text-warning-emphasis">Calls</th>
+        <th class="text-warning-emphasis">Prediction</th>
+        <th class="text-warning-emphasis">Outcome</th>
+        <th class="text-warning-emphasis"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <% if customer.user == current_user %>
+          <tr>
+            <td class="text-warning-emphasis"><%= customer.id %></td>
+            <td><%= customer.first_name %></td>
+            <td><%= customer.last_name %></td>
+            <td><%= customer.contact %></td>
+            <td><%= customer.calls %></td>
+            <% if customer.prediction == "Positive" %>
+              <td class="text-success-emphasis"><%= customer.prediction %></td>
+            <% elsif customer.prediction == "Negative" %>
+              <td class="text-danger-emphasis"><%= customer.prediction %></td>
+            <% elsif customer.prediction == "Unknown" %>
+              <td><%= customer.prediction %></td>
+            <% else %>
+              <td class="text-body-tertiary"><%= customer.prediction %></td>
+            <% end %>
+            <% if customer.outcome == "Success" %>
+              <td class="text-success-emphasis"><%= customer.outcome %></td>
+            <% elsif customer.outcome == "Failure" %>
+              <td class="text-danger-emphasis"><%= customer.outcome %></td>
+            <% else %>
+              <td class="text-body-tertiary"><%= customer.outcome %></td>
+            <% end %>
+            <td><%= link_to "Show", customer, class: "btn btn-sm btn-outline-light" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+

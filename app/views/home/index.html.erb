@@ -1,0 +1,11 @@
+<div class="row" style="min-height: 65%; max-height: 65%;">
+  <% if user_signed_in? %>
+    <%= render partial: "manual" %>
+  <% else %>
+    <div class="col d-flex justify-content-center align-items-center">
+      <h1 class="text-light-emphasis">Welcome to BankTeleSys!</h1>
+    </div>
+  <% end %>
+</div>
+<div class="row border-top border-warning-subtle" style="min-height: 25%; max-height: 25%;">
+</div>

@@ -1,0 +1,18 @@
+<div class="row border-bottom border-warning-subtle" style="max-height: 10%; min-height: 10%;">
+  <div class="col d-flex justify-content-center align-items-center" style="max-width: 20%; min-width: 20%;" id="title">
+    <h3 class="text-light-emphasis">
+      BankTeleSys
+    </h3>
+  </div>
+  <div class="col d-flex justify-content-center align-items-center" style="max-width: 60%; min-width: 60%;" id="alerts">
+    <% if flash[:notice] %>
+      <div class="alert alert-light alert-dismissible fade show" role="alert">
+        <%= notice %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
+  </div>
+  <div class="col d-flex justify-content-center align-items-center" style="max-width: 20%; min-width: 20%;" id="exit">
+    <button class="btn btn-outline-light">Exit</button>
+  </div>
+</div>
