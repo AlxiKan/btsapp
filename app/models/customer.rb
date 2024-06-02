@@ -6,14 +6,11 @@ class Customer < ApplicationRecord
 
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" } #, uniqueness: true
-  validates :contact, presence: true #, format: { with: /\A\+30 (2\d{3} \d{6}|69\d \d{3} \d{4})\z/, message: "must be in the format '+30 2xxx xxxxxx' or '+30 69x xxx xxxx'" }
-  # validations :prediction
-  # validates :outcome, presence: true, exclusion: { in: ['not selected'], message: "'not selected' is not a valid outcome" }
+  #validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" } #, uniqueness: true
+  #validates :contact, presence: true #, format: { with: /\A\+30 (2\d{3} \d{6}|69\d \d{3} \d{4})\z/, message: "must be in the format '+30 2xxx xxxxxx' or '+30 69x xxx xxxx'" }
+  #validates :outcome, presence: true, exclusion: { in: ['not selected'], message: "'not selected' is not a valid outcome" }
   validates :date_of_birth, presence: true
-  validates :balance, presence: true #, numericality: {"must be a number"}
-  # validates :calls
-  # validates :last_call
+  validates :balance, presence: true 
   validates :previous_calls, numericality: { greater_than_or_equal_to: 0, message: "must be a number greater than or equal to 0" }
   validates :job, inclusion: { in: %w(Managerial Technician Entrepreneur Blue-Collar Unknown Retired Administrative Services Self-Employed Unemployed Housemaid Student), message: "%{value} is not valid" }
   validates :marital, inclusion: { in: %w(Married Single Divorced Unknown), message: "%{value} is not valid" }
@@ -62,20 +59,28 @@ class Customer < ApplicationRecord
   def self.prediction(user_id)
     customers = where(user_id: user_id, prediction: "Unknown")
     customers = customers.select(
-      :id,:contact,:last_call,:calls,
+      :id,:contact,:calls,
       :date_of_birth,:job,:marital,:education,:default,:balance,
       :housing,:loan,:previous_calls,:previous_outcome).to_json
     customers
   end
 
   def self.training(user_id)
-    customers = where(user_id: user_id)
-    customers = where.not(outcome: "Unknown")
+    customers = where(user_id: user_id).where.not(outcome: "Unknown")
     customers = customers.select(
-      :contact,:calls,:date_of_birth,:job,:marital,:education,
-      :default,:balance,:housing,:loan,:previous_calls,
+      :id,:last_call,:contact,:calls,:date_of_birth,:job,:marital,
+      :education,:default,:balance,:housing,:loan,:previous_calls,
       :previous_outcome,:outcome).to_json
     customers
+  end
+
+  def self.update_predictions(data)
+    data.each do |item|
+      customer = Customer.find_by(id: item["id"])
+      if customer
+        customer.update(prediction: item["prediction"])
+      end
+    end
   end
 end
 

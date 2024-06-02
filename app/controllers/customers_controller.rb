@@ -81,24 +81,44 @@ class CustomersController < ApplicationController
       uri = URI.parse("https://127.0.0.1:5000/#{params[:action_type]}")
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Post.new(uri.request_uri)
-      if params[:action_type] == "training/new"
-        data = { data: JSON.parse(Customer.training(params[:user_id])) }.to_json
-      elsif params[:action_type] == "prediction"
-        data = { data: JSON.parse(Customer.prediction(params[:user_id])) }.to_json
-      end 
-      request.body = data
-      request["Content-Type"] = "application/json"
-      begin
-        response = http.request(request)
-        data = JSON.parse(response.body)
-        if data["Error"]
-          redirect_to customers_path, notice: "#{data}"
-        else
-          redirect_to customers_path
+
+      data = case params[:action_type]
+             when "training/new"
+               { data: JSON.parse(Customer.training(params[:user_id])) }.to_json
+             when "prediction"
+               { data: JSON.parse(Customer.prediction(params[:user_id])) }.to_json
+             else
+               {}
+             end
+
+      if data.present? && JSON.parse(data)["data"].count > 0
+        begin
+          request.body = data
+          request["Content-Type"] = "application/json"
+          response = http.request(request)
+          response_data = JSON.parse(response.body)
+          
+          if params[:action_type] == "prediction"
+            Customer.update_predictions(response_data)
+            pos_count = response_data.count { |customer| customer["prediction"] == "Positive" }
+            redirect_to customers_path, notice: "#{pos_count} out of #{response_data.length} instances were predicted as positive."
+          else
+            redirect_to customers_path, notice: "#{response_data['message']}"
+          end
+        rescue StandardError => e
+          Rails.logger.error("Error in customers_action: #{e.message}")
+          if response_data
+            er = response_data["Error"]
+            redirect_to customers_path, notice: "#{er}"
+          else 
+            redirect_to customers_path, notice: "API Services not available."
+          end
         end
-      rescue StandardError => e
-        redirect_to customers_path, notice: "API Services not available."
+      else
+        redirect_to customers_path, notice: "No data available for the action."
       end
+    else
+      redirect_to customers_path, notice: "Invalid parameters."
     end
   end
 
