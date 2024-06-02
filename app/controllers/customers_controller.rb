@@ -78,7 +78,9 @@ class CustomersController < ApplicationController
 
   def customers_action
     if params[:user_id].present? && params[:action_type].present?
-      uri = URI.parse("https://127.0.0.1:5000/#{params[:action_type]}")
+      port = "5000"
+      host = "172.17.0.2"
+      uri = URI.parse("http://#{host}:#{port}/#{params[:action_type]}")
       http = Net::HTTP.new(uri.host, uri.port)
       request = Net::HTTP::Post.new(uri.request_uri)
 
